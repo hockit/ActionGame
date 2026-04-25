@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "ActionPlayerCharacter.generated.h"
 
+class UActionAbilitySystemComponent;
 class UActionInteractionComponent;
 struct FInputActionInstance;
 struct FInputActionValue;
@@ -19,10 +20,7 @@ class ACTIONGAME_API AActionPlayerCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	AActionPlayerCharacter();
-	virtual void Tick(float DeltaTime) override;
-
-	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -36,6 +34,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category="Components")
 	TObjectPtr<UActionInteractionComponent> InteractionComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components")
+	TObjectPtr<UActionAbilitySystemComponent> AbilitySystemComponent;
+
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UDataAsset_InputConfig> InputConfig;
 
@@ -43,5 +44,11 @@ private:
 	void Move(const FInputActionValue& InValue);
 	void Look(const FInputActionInstance& InValue);
 	void Interact();
+
+public:
+	AActionPlayerCharacter();
+	virtual void Tick(float DeltaTime) override;
+
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 };

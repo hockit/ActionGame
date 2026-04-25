@@ -5,6 +5,7 @@
 
 #include "DataAsset_InputConfig.h"
 #include "EnhancedInputComponent.h"
+#include "ActionGame/AbilitySystem/ActionAbilitySystemComponent.h"
 #include "ActionGame/Components/ActionInteractionComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -23,6 +24,7 @@ AActionPlayerCharacter::AActionPlayerCharacter()
 	CameraComponent->SetupAttachment(SpringArmComponent);
 
 	InteractionComponent = CreateDefaultSubobject<UActionInteractionComponent>(TEXT("InteractionComp"));
+	AbilitySystemComponent = CreateDefaultSubobject<UActionAbilitySystemComponent>(TEXT("AbilitySystemComp"));
 
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -50,6 +52,16 @@ void AActionPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerIn
 	InputComp->BindAction(InputConfig->Input_Look, ETriggerEvent::Triggered, this, &ThisClass::Look);
 	InputComp->BindAction(InputConfig->Input_Interact, ETriggerEvent::Triggered, this, &ThisClass::Interact);
 
+}
+
+float AActionPlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
+	class AController* EventInstigator, AActor* DamageCauser)
+{
+	float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	AbilitySystemComponent->ApplyHealthChange(-ActualDamage);
+	
+	return ActualDamage;
 }
 
 void AActionPlayerCharacter::Move(const FInputActionValue& InValue)
