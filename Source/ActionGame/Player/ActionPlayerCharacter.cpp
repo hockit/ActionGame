@@ -5,6 +5,7 @@
 
 #include "DataAsset_InputConfig.h"
 #include "EnhancedInputComponent.h"
+#include "ActionGame/Components/ActionInteractionComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -20,6 +21,8 @@ AActionPlayerCharacter::AActionPlayerCharacter()
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComponent->SetupAttachment(SpringArmComponent);
+
+	InteractionComponent = CreateDefaultSubobject<UActionInteractionComponent>(TEXT("InteractionComp"));
 
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -45,6 +48,7 @@ void AActionPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerIn
 
 	InputComp->BindAction(InputConfig->Input_Move, ETriggerEvent::Triggered, this, &ThisClass::Move);
 	InputComp->BindAction(InputConfig->Input_Look, ETriggerEvent::Triggered, this, &ThisClass::Look);
+	InputComp->BindAction(InputConfig->Input_Interact, ETriggerEvent::Triggered, this, &ThisClass::Interact);
 
 }
 
@@ -65,6 +69,11 @@ void AActionPlayerCharacter::Look(const FInputActionInstance& InValue)
 	
 	AddControllerPitchInput(InputValue.Y);
 	AddControllerYawInput(InputValue.X);
+}
+
+void AActionPlayerCharacter::Interact()
+{
+	InteractionComponent->Interact();
 }
 
 

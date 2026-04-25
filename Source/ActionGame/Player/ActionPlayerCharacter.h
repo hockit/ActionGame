@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "ActionPlayerCharacter.generated.h"
 
+class UActionInteractionComponent;
 struct FInputActionInstance;
 struct FInputActionValue;
 class UDataAsset_InputConfig;
@@ -32,11 +33,15 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category="Components")
 	TObjectPtr<UCameraComponent> CameraComponent;
 
+	UPROPERTY(VisibleAnywhere, Category="Components")
+	TObjectPtr<UActionInteractionComponent> InteractionComponent;
+
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UDataAsset_InputConfig> InputConfig;
 
 private:	
 	void Move(const FInputActionValue& InValue);
 	void Look(const FInputActionInstance& InValue);
+	void Interact();
 
 };
