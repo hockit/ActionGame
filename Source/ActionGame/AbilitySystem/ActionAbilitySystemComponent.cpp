@@ -10,7 +10,19 @@ UActionAbilitySystemComponent::UActionAbilitySystemComponent()
 
 void UActionAbilitySystemComponent::ApplyHealthChange(float InValueChange)
 {
+	float OldHealth = Attributes.Health;
+	
 	Attributes.Health += InValueChange;
 
-	UE_LOG(LogTemp, Log, TEXT("New Health: %f"), Attributes.Health);
+	OnHealthChanged.Broadcast(Attributes.Health, OldHealth);
+
+}
+
+void UActionAbilitySystemComponent::ApplyManaChange(float InValueChange)
+{
+	float OldMana = Attributes.Mana;
+	
+	Attributes.Mana += InValueChange;
+
+	OnManaChanged.Broadcast(Attributes.Mana, OldMana);
 }
