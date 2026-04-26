@@ -6,6 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "ActionAbilitySystemComponent.generated.h"
 
+class UActionAbility;
+
 USTRUCT(BlueprintType)
 struct FActionAttributeSet
 {
@@ -32,6 +34,9 @@ class ACTIONGAME_API UActionAbilitySystemComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
+
+	void StartAbility(FName InAbilityName);
+	
 	UFUNCTION(BlueprintCallable)
 	void ApplyHealthChange(float InValueChange);
 
@@ -48,7 +53,12 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category="Attribute")
 	FActionAttributeSet Attributes;
 
+	UPROPERTY()
+	TArray<TObjectPtr<UActionAbility>> Abilities;
+
 public:
 	UActionAbilitySystemComponent();
+
+	virtual void InitializeComponent() override;
 
 };

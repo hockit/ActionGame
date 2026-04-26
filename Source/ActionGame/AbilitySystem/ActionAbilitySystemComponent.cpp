@@ -3,9 +3,34 @@
 
 #include "ActionAbilitySystemComponent.h"
 
+#include "ActionAbility.h"
+
 
 UActionAbilitySystemComponent::UActionAbilitySystemComponent()
 {
+	bWantsInitializeComponent = true;
+}
+
+void UActionAbilitySystemComponent::InitializeComponent()
+{
+	Super::InitializeComponent();
+
+	UActionAbility* NewAbility = NewObject<UActionAbility>(this, UActionAbility::StaticClass());
+	Abilities.Add(NewAbility);
+}
+
+void UActionAbilitySystemComponent::StartAbility(FName InAbilityName)
+{
+	for (UActionAbility* Ability : Abilities)
+	{
+		if (Ability->GetAbilityName() == InAbilityName)
+		{
+			Ability->StartAbility();
+			return;
+		}
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("No ability found with name %s"), *InAbilityName.ToString());
 }
 
 void UActionAbilitySystemComponent::ApplyHealthChange(float InValueChange)
