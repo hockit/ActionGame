@@ -51,6 +51,7 @@ void AActionPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerIn
 	InputComp->BindAction(InputConfig->Input_Move, ETriggerEvent::Triggered, this, &ThisClass::Move);
 	InputComp->BindAction(InputConfig->Input_Look, ETriggerEvent::Triggered, this, &ThisClass::Look);
 	InputComp->BindAction(InputConfig->Input_Interact, ETriggerEvent::Triggered, this, &ThisClass::Interact);
+	InputComp->BindAction(InputConfig->Input_Dash, ETriggerEvent::Triggered, this, &ThisClass::StartAbility, FName("Dash"));
 
 }
 
@@ -86,6 +87,11 @@ void AActionPlayerCharacter::Look(const FInputActionInstance& InValue)
 void AActionPlayerCharacter::Interact()
 {
 	InteractionComponent->Interact();
+}
+
+void AActionPlayerCharacter::StartAbility(const FName InAbilityName)
+{
+	AbilitySystemComponent->StartAbility(InAbilityName);
 }
 
 

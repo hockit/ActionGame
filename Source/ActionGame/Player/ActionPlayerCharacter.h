@@ -40,10 +40,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UDataAsset_InputConfig> InputConfig;
 
-private:	
+
 	void Move(const FInputActionValue& InValue);
 	void Look(const FInputActionInstance& InValue);
 	void Interact();
+
+	void StartAbility(const FName InAbilityName);
 
 public:
 	AActionPlayerCharacter();
