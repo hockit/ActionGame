@@ -56,9 +56,13 @@ protected:
 	UPROPERTY()
 	TArray<TObjectPtr<UActionAbility>> Abilities;
 
+	UPROPERTY(EditAnywhere, Category="Abilities")
+	TArray<TSubclassOf<UActionAbility>> DefaultAbilities;
+
 public:
 	UActionAbilitySystemComponent();
 
 	virtual void InitializeComponent() override;
 
+	void GrantAbility(TSubclassOf<UActionAbility>& NewAbilityClass);
 };

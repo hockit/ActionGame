@@ -15,7 +15,15 @@ void UActionAbilitySystemComponent::InitializeComponent()
 {
 	Super::InitializeComponent();
 
-	UActionAbility* NewAbility = NewObject<UActionAbility>(this, UActionAbility::StaticClass());
+	for (TSubclassOf<UActionAbility> AbilityClass : DefaultAbilities)
+	{
+		GrantAbility(AbilityClass);
+	}
+}
+
+void UActionAbilitySystemComponent::GrantAbility(TSubclassOf<UActionAbility>& NewAbilityClass)
+{
+	UActionAbility* NewAbility = NewObject<UActionAbility>(this, NewAbilityClass);
 	Abilities.Add(NewAbility);
 }
 
@@ -40,7 +48,6 @@ void UActionAbilitySystemComponent::ApplyHealthChange(float InValueChange)
 	Attributes.Health += InValueChange;
 
 	OnHealthChanged.Broadcast(Attributes.Health, OldHealth);
-
 }
 
 void UActionAbilitySystemComponent::ApplyManaChange(float InValueChange)
