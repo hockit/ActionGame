@@ -6,10 +6,11 @@
 #include "UObject/Object.h"
 #include "ActionAbility.generated.h"
 
+class UActionAbilitySystemComponent;
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable, Abstract)
 class ACTIONGAME_API UActionAbility : public UObject
 {
 	GENERATED_BODY()
@@ -19,8 +20,9 @@ protected:
 	FName AbilityName = FName("Dash");
 
 public:
-	void StartAbility();
+	virtual void StartAbility();
 
+	UActionAbilitySystemComponent* GetOwningComponent() const;
 	
 	FName GetAbilityName() const { return AbilityName; }	
 };
