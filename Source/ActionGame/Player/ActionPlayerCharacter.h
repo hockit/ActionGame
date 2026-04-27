@@ -20,6 +20,7 @@ class ACTIONGAME_API AActionPlayerCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
+	AActionPlayerCharacter();
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 protected:
@@ -48,7 +49,6 @@ protected:
 	void StartAbility(const FName InAbilityName);
 
 public:
-	AActionPlayerCharacter();
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
