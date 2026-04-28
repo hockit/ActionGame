@@ -13,6 +13,14 @@ void UActionAbility::StartAbility_Implementation()
 		("WorldTime", GameTime));
 }
 
+void UActionAbility::StopAbility_Implementation()
+{
+	float GameTime = GetWorld()->TimeSeconds;
+	UE_LOGFMT(LogTemp, Log, "Stopped Ability {AbilityName} - {WorldTime}",
+		("AbilityName", AbilityName),
+		("WorldTime", GameTime));
+}
+
 UActionAbilitySystemComponent* UActionAbility::GetOwningComponent() const
 {
 	return Cast<UActionAbilitySystemComponent>(GetOuter());

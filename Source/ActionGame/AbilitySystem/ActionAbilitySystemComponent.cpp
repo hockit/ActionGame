@@ -46,6 +46,16 @@ void UActionAbilitySystemComponent::StartAbility(FName InAbilityName)
 
 void UActionAbilitySystemComponent::StopAbility(FName InAbilityName)
 {
+	for (UActionAbility* Ability : Abilities)
+	{
+		if (Ability->GetAbilityName() == InAbilityName)
+		{
+			Ability->StopAbility();
+			return;
+		}
+	}
+	
+	UE_LOG(LogTemp, Warning, TEXT("No ability found with name %s"), *InAbilityName.ToString());
 }
 
 void UActionAbilitySystemComponent::ApplyHealthChange(float InValueChange)

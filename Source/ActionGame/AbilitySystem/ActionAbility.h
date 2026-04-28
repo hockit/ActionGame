@@ -26,6 +26,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, Category="Abilities")
 	void StartAbility();
+
+	UFUNCTION(BlueprintNativeEvent, Category="Abilities")
+	void StopAbility();
 	
 	FName GetAbilityName() const { return AbilityName; }
 };

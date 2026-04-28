@@ -52,7 +52,9 @@ void AActionPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerIn
 	InputComp->BindAction(InputConfig->Input_Look, ETriggerEvent::Triggered, this, &ThisClass::Look);
 	InputComp->BindAction(InputConfig->Input_Interact, ETriggerEvent::Triggered, this, &ThisClass::Interact);
 	InputComp->BindAction(InputConfig->Input_Dash, ETriggerEvent::Triggered, this, &ThisClass::StartAbility, FName("Dash"));
-
+	
+	InputComp->BindAction(InputConfig->Input_Sprint, ETriggerEvent::Started, this, &ThisClass::StartAbility, FName("Sprint"));
+	InputComp->BindAction(InputConfig->Input_Sprint, ETriggerEvent::Completed, this, &ThisClass::StopAbility, FName("Sprint"));
 }
 
 float AActionPlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
@@ -92,6 +94,11 @@ void AActionPlayerCharacter::Interact()
 void AActionPlayerCharacter::StartAbility(const FName InAbilityName)
 {
 	AbilitySystemComponent->StartAbility(InAbilityName);
+}
+
+void AActionPlayerCharacter::StopAbility(const FName InAbilityName)
+{
+	AbilitySystemComponent->StopAbility(InAbilityName);
 }
 
 

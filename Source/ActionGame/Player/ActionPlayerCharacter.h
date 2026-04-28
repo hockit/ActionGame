@@ -47,6 +47,7 @@ protected:
 	void Interact();
 
 	void StartAbility(const FName InAbilityName);
+	void StopAbility(const FName InAbilityName);
 
 public:
 	virtual void Tick(float DeltaTime) override;
