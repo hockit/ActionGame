@@ -5,9 +5,9 @@
 
 #include "ActionAbilitySystemComponent.h"
 
-void UActionAbility::StartAbility()
+void UActionAbility::StartAbility_Implementation()
 {
-	float GameTime = 0.f;
+	float GameTime = GetWorld()->TimeSeconds;
 	UE_LOGFMT(LogTemp, Log, "Started Ability {AbilityName} - {WorldTime}",
 		("AbilityName", AbilityName),
 		("WorldTime", GameTime));

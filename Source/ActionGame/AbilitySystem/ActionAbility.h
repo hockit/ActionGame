@@ -17,12 +17,15 @@ class ACTIONGAME_API UActionAbility : public UObject
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category="Abilities")
-	FName AbilityName = FName("Dash");
+	FName AbilityName;
 
 public:
-	virtual void StartAbility();
 
+	UFUNCTION(BlueprintCallable)
 	UActionAbilitySystemComponent* GetOwningComponent() const;
+
+	UFUNCTION(BlueprintNativeEvent, Category="Abilities")
+	void StartAbility();
 	
-	FName GetAbilityName() const { return AbilityName; }	
+	FName GetAbilityName() const { return AbilityName; }
 };

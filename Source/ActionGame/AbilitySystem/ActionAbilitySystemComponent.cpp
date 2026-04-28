@@ -17,7 +17,10 @@ void UActionAbilitySystemComponent::InitializeComponent()
 
 	for (TSubclassOf<UActionAbility> AbilityClass : DefaultAbilities)
 	{
-		GrantAbility(AbilityClass);
+		if (ensure(AbilityClass))
+		{
+			GrantAbility(AbilityClass);	
+		}
 	}
 }
 
@@ -41,6 +44,10 @@ void UActionAbilitySystemComponent::StartAbility(FName InAbilityName)
 	UE_LOG(LogTemp, Warning, TEXT("No ability found with name %s"), *InAbilityName.ToString());
 }
 
+void UActionAbilitySystemComponent::StopAbility(FName InAbilityName)
+{
+}
+
 void UActionAbilitySystemComponent::ApplyHealthChange(float InValueChange)
 {
 	float OldHealth = Attributes.Health;
@@ -57,4 +64,13 @@ void UActionAbilitySystemComponent::ApplyManaChange(float InValueChange)
 	Attributes.Mana += InValueChange;
 
 	OnManaChanged.Broadcast(Attributes.Mana, OldMana);
+}
+
+void UActionAbilitySystemComponent::ApplyStaminaChange(float InValueChange)
+{
+	float OldStamina = Attributes.Stamina;
+	
+	Attributes.Stamina += InValueChange;
+
+	OnStaminaChanged.Broadcast(Attributes.Stamina, OldStamina);
 }

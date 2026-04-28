@@ -6,9 +6,9 @@
 #include "ActionGame/AbilitySystem/ActionAbilitySystemComponent.h"
 #include "GameFramework/Character.h"
 
-void UActionAbility_Dash::StartAbility()
+void UActionAbility_Dash::StartAbility_Implementation()
 {
-	Super::StartAbility();
+	Super::StartAbility_Implementation();
 
 	UActionAbilitySystemComponent* AbilityComp = GetOwningComponent();
 	ACharacter* Character = CastChecked<ACharacter>(AbilityComp->GetOwner());
@@ -18,6 +18,7 @@ void UActionAbility_Dash::StartAbility()
 	{
 		DashDir = Character->GetActorForwardVector();
 	}
-	
+
+	AbilityComp->ApplyStaminaChange(-10.f);
 	Character->LaunchCharacter(DashDir * DashIntensity, true, true);
 }

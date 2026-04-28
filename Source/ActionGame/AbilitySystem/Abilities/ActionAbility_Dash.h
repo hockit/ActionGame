@@ -20,5 +20,5 @@ protected:
 	float DashIntensity = 2500.f;
 
 public:
-	virtual void StartAbility() override;
+	virtual void StartAbility_Implementation() override;
 };
