@@ -5,6 +5,7 @@
 
 #include "ActionGame/AbilitySystem/ActionAbilitySystemComponent.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/PawnMovementComponent.h"
 
 void UActionAbility_Dash::StartAbility_Implementation()
 {
@@ -13,12 +14,15 @@ void UActionAbility_Dash::StartAbility_Implementation()
 	UActionAbilitySystemComponent* AbilityComp = GetOwningComponent();
 	ACharacter* Character = CastChecked<ACharacter>(AbilityComp->GetOwner());
 
-	FVector DashDir = Character->GetVelocity().GetSafeNormal();
-	if (DashDir.IsNearlyZero())
+	if (!Character->GetMovementComponent()->IsFalling())
 	{
-		DashDir = Character->GetActorForwardVector();
+		FVector DashDir = Character->GetVelocity().GetSafeNormal();
+		if (DashDir.IsNearlyZero())
+		{
+			DashDir = Character->GetActorForwardVector();
+		}
+        
+		AbilityComp->ApplyStaminaChange(-10.f);
+        Character->LaunchCharacter(DashDir * DashIntensity, true, true);
 	}
-
-	AbilityComp->ApplyStaminaChange(-10.f);
-	Character->LaunchCharacter(DashDir * DashIntensity, true, true);
 }
