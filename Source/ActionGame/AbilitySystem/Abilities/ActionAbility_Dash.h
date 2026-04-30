@@ -14,6 +14,9 @@ class ACTIONGAME_API UActionAbility_Dash : public UActionAbility
 {
 	GENERATED_BODY()
 
+public:
+	UActionAbility_Dash();
+
 protected:
 
 	UPROPERTY(EditDefaultsOnly, Category="Dash")

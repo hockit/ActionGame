@@ -7,6 +7,11 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/PawnMovementComponent.h"
 
+UActionAbility_Dash::UActionAbility_Dash()
+{
+	CooldownTime = 0.5f;
+}
+
 void UActionAbility_Dash::StartAbility_Implementation()
 {
 	Super::StartAbility_Implementation();
@@ -25,4 +30,6 @@ void UActionAbility_Dash::StartAbility_Implementation()
 		AbilityComp->ApplyStaminaChange(-10.f);
         Character->LaunchCharacter(DashDir * DashIntensity, true, true);
 	}
+
+	StopAbility();
 }

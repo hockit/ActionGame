@@ -36,7 +36,11 @@ void UActionAbilitySystemComponent::StartAbility(FName InAbilityName)
 	{
 		if (Ability->GetAbilityName() == InAbilityName)
 		{
-			Ability->StartAbility();
+			if (Ability->CanStart())
+			{
+				Ability->StartAbility();
+			}
+			
 			return;
 		}
 	}

@@ -19,16 +19,33 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Abilities")
 	FName AbilityName;
 
+	UPROPERTY(EditDefaultsOnly, Category="Abilities")
+	float CooldownTime = 0.f;
+
 public:
 
 	UFUNCTION(BlueprintCallable)
 	UActionAbilitySystemComponent* GetOwningComponent() const;
+
+	bool CanStart() const;
+
+	bool IsRunning() const { return bIsRunning; }
 
 	UFUNCTION(BlueprintNativeEvent, Category="Abilities")
 	void StartAbility();
 
 	UFUNCTION(BlueprintNativeEvent, Category="Abilities")
 	void StopAbility();
+
+	float GetCooldownTimeRemaining() const;
 	
 	FName GetAbilityName() const { return AbilityName; }
+
+protected:
+
+	UPROPERTY(Transient)
+	bool bIsRunning = false;
+
+	UPROPERTY(Transient)
+	float CooldownUntil = 0.f;
 };
