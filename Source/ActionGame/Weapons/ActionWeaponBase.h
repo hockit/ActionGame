@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "AbilityWeaponBase.generated.h"
+#include "ActionWeaponBase.generated.h"
 
 class UActionAbility;
 class UStaticMeshComponent;
@@ -31,12 +31,12 @@ struct FWeaponConfig
 
 
 UCLASS()
-class ACTIONGAME_API AAbilityWeaponBase : public AActor
+class ACTIONGAME_API AActionWeaponBase : public AActor
 {
 	GENERATED_BODY()
 
 public:
-	AAbilityWeaponBase();
+	AActionWeaponBase();
 
 protected:
 	virtual void BeginPlay() override;

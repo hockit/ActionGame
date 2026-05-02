@@ -1,11 +1,11 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "AbilityWeaponBase.h"
+#include "ActionWeaponBase.h"
 
 
 // Sets default values
-AAbilityWeaponBase::AAbilityWeaponBase()
+AActionWeaponBase::AActionWeaponBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -14,13 +14,13 @@ AAbilityWeaponBase::AAbilityWeaponBase()
 	WeaponMesh->SetCollisionProfileName("NoCollision");
 }
 
-void AAbilityWeaponBase::BeginPlay()
+void AActionWeaponBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-void AAbilityWeaponBase::Tick(float DeltaTime)
+void AActionWeaponBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
