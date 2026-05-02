@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "ActionPlayerCharacter.generated.h"
 
+class UActionWeaponManagerComponent;
 struct FGameplayTag;
 class UActionAbilitySystemComponent;
 class UActionInteractionComponent;
@@ -38,6 +39,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components")
 	TObjectPtr<UActionAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components")
+	TObjectPtr<UActionWeaponManagerComponent> WeaponManagerComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UDataAsset_InputConfig> InputConfig;

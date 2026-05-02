@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Data/Data_WeaponProperties.h"
 #include "GameFramework/Actor.h"
 #include "ActionWeaponBase.generated.h"
 
@@ -10,33 +11,15 @@ class UActionAbility;
 class UStaticMeshComponent;
 
 
-
-USTRUCT(BlueprintType)
-struct FWeaponConfig
-{
-	GENERATED_BODY()
-
-	FWeaponConfig() {}
-
-	UPROPERTY(EditDefaultsOnly, Category="Weapon")
-	TArray<TSubclassOf<UActionAbility>> AbilitiesToGrant;
-
-	UPROPERTY(EditDefaultsOnly, Category="Weapon")
-	FName EquippedSocketName;
-
-	UPROPERTY(EditDefaultsOnly, Category="Weapon")
-	TSubclassOf<UAnimInstance> AnimClass;
-};
-
-
-
-UCLASS()
+UCLASS(Abstract)
 class ACTIONGAME_API AActionWeaponBase : public AActor
 {
 	GENERATED_BODY()
 
 public:
 	AActionWeaponBase();
+
+	FWeaponConfig GetWeaponConfig() const { return WeaponConfig; }
 
 protected:
 	virtual void BeginPlay() override;

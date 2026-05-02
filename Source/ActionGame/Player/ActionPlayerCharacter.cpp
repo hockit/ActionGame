@@ -9,6 +9,7 @@
 #include "ActionGame/SharedGameplayTags.h"
 #include "ActionGame/AbilitySystem/ActionAbilitySystemComponent.h"
 #include "ActionGame/Components/ActionInteractionComponent.h"
+#include "ActionGame/Components/ActionWeaponManagerComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -27,10 +28,12 @@ AActionPlayerCharacter::AActionPlayerCharacter()
 
 	InteractionComponent = CreateDefaultSubobject<UActionInteractionComponent>(TEXT("InteractionComp"));
 	AbilitySystemComponent = CreateDefaultSubobject<UActionAbilitySystemComponent>(TEXT("AbilitySystemComp"));
+	WeaponManagerComponent = CreateDefaultSubobject<UActionWeaponManagerComponent>(TEXT("WeaponManagerComp"));
 
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->RotationRate = FRotator(0.f, 0.f, 630.f);
+	GetCharacterMovement()->bUseControllerDesiredRotation = false;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 630.f, 0.f);
 	GetCharacterMovement()->BrakingDecelerationWalking = 1024.f;
 	
 }

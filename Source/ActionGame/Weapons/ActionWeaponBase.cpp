@@ -10,7 +10,7 @@ AActionWeaponBase::AActionWeaponBase()
 	PrimaryActorTick.bCanEverTick = true;
 
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
-	//WeaponMesh->SetupAttachment(GetRootComponent());
+	RootComponent = WeaponMesh;
 	WeaponMesh->SetCollisionProfileName("NoCollision");
 }
 
