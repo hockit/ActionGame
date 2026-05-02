@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "ActionAbilitySystemComponent.generated.h"
 
+struct FGameplayTag;
 class UActionAbility;
 
 USTRUCT(BlueprintType)
@@ -40,9 +41,9 @@ class ACTIONGAME_API UActionAbilitySystemComponent : public UActorComponent
 
 public:
 
-	void StartAbility(FName InAbilityName);
+	void StartAbility(FGameplayTag InAbilityName);
 	
-	void StopAbility(FName InAbilityName);
+	void StopAbility(FGameplayTag InAbilityName);
 	
 	UFUNCTION(BlueprintCallable)
 	void ApplyHealthChange(float InValueChange);

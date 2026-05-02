@@ -30,7 +30,7 @@ void UActionAbilitySystemComponent::GrantAbility(TSubclassOf<UActionAbility>& Ne
 	Abilities.Add(NewAbility);
 }
 
-void UActionAbilitySystemComponent::StartAbility(FName InAbilityName)
+void UActionAbilitySystemComponent::StartAbility(FGameplayTag InAbilityName)
 {
 	for (UActionAbility* Ability : Abilities)
 	{
@@ -48,7 +48,7 @@ void UActionAbilitySystemComponent::StartAbility(FName InAbilityName)
 	UE_LOG(LogTemp, Warning, TEXT("No ability found with name %s"), *InAbilityName.ToString());
 }
 
-void UActionAbilitySystemComponent::StopAbility(FName InAbilityName)
+void UActionAbilitySystemComponent::StopAbility(FGameplayTag InAbilityName)
 {
 	for (UActionAbility* Ability : Abilities)
 	{

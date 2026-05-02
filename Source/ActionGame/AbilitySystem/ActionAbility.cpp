@@ -11,7 +11,7 @@ void UActionAbility::StartAbility_Implementation()
 	
 	float GameTime = GetWorld()->TimeSeconds;
 	UE_LOGFMT(LogTemp, Log, "Started Ability {AbilityName} - {WorldTime}",
-		("AbilityName", AbilityName),
+		("AbilityName", AbilityName.ToString()),
 		("WorldTime", GameTime));
 }
 
@@ -21,7 +21,7 @@ void UActionAbility::StopAbility_Implementation()
 	
 	float GameTime = GetWorld()->TimeSeconds;
 	UE_LOGFMT(LogTemp, Log, "Stopped Ability {AbilityName} - {WorldTime}",
-		("AbilityName", AbilityName),
+		("AbilityName", AbilityName.ToString()),
 		("WorldTime", GameTime));
 
 	CooldownUntil = GetWorld()->TimeSeconds + CooldownTime;

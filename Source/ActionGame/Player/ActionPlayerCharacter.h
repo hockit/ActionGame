@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "ActionPlayerCharacter.generated.h"
 
+struct FGameplayTag;
 class UActionAbilitySystemComponent;
 class UActionInteractionComponent;
 struct FInputActionInstance;
@@ -46,8 +47,8 @@ protected:
 	void Look(const FInputActionInstance& InValue);
 	void Interact();
 
-	void StartAbility(const FName InAbilityName);
-	void StopAbility(const FName InAbilityName);
+	void StartAbility(FGameplayTag InAbilityName);
+	void StopAbility(FGameplayTag InAbilityName);
 
 public:
 	virtual void Tick(float DeltaTime) override;

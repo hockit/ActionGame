@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "UObject/Object.h"
 #include "ActionAbility.generated.h"
 
@@ -17,7 +18,7 @@ class ACTIONGAME_API UActionAbility : public UObject
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category="Abilities")
-	FName AbilityName;
+	FGameplayTag AbilityName;
 
 	UPROPERTY(EditDefaultsOnly, Category="Abilities")
 	float CooldownTime = 0.f;
@@ -39,7 +40,7 @@ public:
 
 	float GetCooldownTimeRemaining() const;
 	
-	FName GetAbilityName() const { return AbilityName; }
+	FGameplayTag GetAbilityName() const { return AbilityName; }
 
 protected:
 
